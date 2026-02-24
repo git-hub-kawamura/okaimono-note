@@ -6,6 +6,19 @@
     <title>My Google AI Studio App</title>
   </head>
   <body>
+    <script>
+      // iOS Safari: input/select フォーカス解除後に自動でズームをリセット
+      document.addEventListener('blur', function(e) {
+        const tag = e.target && e.target.tagName;
+        if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') {
+          const mv = document.querySelector('meta[name=viewport]');
+          mv.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
+          requestAnimationFrame(function() {
+            mv.setAttribute('content', 'width=device-width, initial-scale=1.0');
+          });
+        }
+      }, true);
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
